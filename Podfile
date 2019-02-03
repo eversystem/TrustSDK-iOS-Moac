@@ -4,7 +4,7 @@ use_frameworks!
 target 'TrustSDK' do
   pod 'TrustCore', :git=>'https://github.com/liweiz/trust-core-moac', :branch=>'commit_f987ee1', inhibit_warnings: true
   pod 'Result', '~> 3.0.0'
-  pod 'SwiftLint'
+  pod 'SwiftLint', '0.25.0'
 
   target 'TrustSDKTests'
   target 'TrustWalletSDK'
