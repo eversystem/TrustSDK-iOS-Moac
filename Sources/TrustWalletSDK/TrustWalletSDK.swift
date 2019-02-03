@@ -108,9 +108,20 @@ public final class TrustWalletSDK {
         guard let amount = components.queryParameterValue(for: "amount").flatMap({ BigInt($0) }) else {
             return false
         }
+        
+        guard let shardingFlag = components.queryParameterValue(for: "shardingFlag").flatMap({ UInt64($0) }) else {
+            return false
+        }
+        guard let systemContract = components.queryParameterValue(for: "systemContract").flatMap({ UInt64($0) }) else {
+            return false
+        }
+        guard let via = components.queryParameterValue(for: "via").flatMap({ MoacAddress(string: $0) }) else {
+            return false
+        }
+
         let callback = components.queryParameterValue(for: "callback").flatMap({ URL(string: $0) })
 
-        var transaction = Transaction(gasPrice: gasPrice, gasLimit: gasLimit, to: to)
+        var transaction = Transaction(gasPrice: gasPrice, gasLimit: gasLimit, to: to, shardingFlag: shardingFlag, systemContract: systemContract, via: via)
         transaction.amount = amount
 
         if let dataHex = components.queryParameterValue(for: "data").flatMap({ String($0) }) {
